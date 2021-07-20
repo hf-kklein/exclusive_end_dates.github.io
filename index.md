@@ -33,14 +33,22 @@ length_of_time_frame = end-start
 | ------------------------ | ------------------------------------- | ------------------------------------- | ------------------------------- |
 | `duration = end - start` | `2021-02-01 - 2021-01-31 = 31 days`✔️ | `2021-01-31 - 2021-01-01 = 30 days`❌ | `duration = end - start + ??`😒 |
 
-When you wantThe duration of a time
+Adding or substracting single days, seconds or ticks, when all you want is just the duration of a time slice is not convenient. 
 
 ## Everyone else does so
-
-Probably
+Barely anyone uses inclusive end dates.
 
 ### Python
 
 ```python
 
 ```
+### C#
+```c#
+var start = new DateTime(2021, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+var end = new DateTime(2021, 2, 1, 0, 0, 0, DateTimeKind.Utc);
+var duration = end-start;
+Console.Out.WriteLine($"The time between {start:O} and {end:O} is {duration.TotalDays} days");
+// The time between 2021-01-01T00:00:00.0000000Z and 2021-02-01T00:00:00.0000000Z is 31 days
+```
+([dotnet fiddle](https://dotnetfiddle.net/QpgTQW))
