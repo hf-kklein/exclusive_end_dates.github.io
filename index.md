@@ -40,6 +40,7 @@ Adding or substracting single days, seconds or ticks, when all you want is just 
 Basically all programming languages follow this convention:
 
 ### Python
+
 ```python
 from datetime import date
 
@@ -49,9 +50,11 @@ duration = end - start
 print(f"The time between {start} and {end} is {duration.days} days")
 # The time between 2021-01-01 and 2021-02-01 is 31 days
 ```
+
 (_Pandas allows [to specify](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.date_range.html) if `date_range` start and end are open/exclusive or closed/inclusive._)
 
 ### C#
+
 ```c#
 var start = new DateTime(2021, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 var end = new DateTime(2021, 2, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -59,11 +62,11 @@ var duration = end-start;
 Console.Out.WriteLine($"The time between {start:O} and {end:O} is {duration.TotalDays} days");
 // The time between 2021-01-01T00:00:00.0000000Z and 2021-02-01T00:00:00.0000000Z is 31 days
 ```
+
 ([dotnet fiddle](https://dotnetfiddle.net/QpgTQW))
 
-
-
 ### Go
+
 ```go
 package main
 
