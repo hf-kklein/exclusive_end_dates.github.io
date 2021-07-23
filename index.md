@@ -7,33 +7,35 @@ When modelling time periods/frames/slices/ranges their end should always be excl
 If you have a time frame, it is usually defined by a start and an end datetime. If your time frame starts at January 1st, then
 
 ```
-start = 2021-01-01
+start = "2021-01-01"
 ```
 
 Inclusive start dates are common sense.
-If the time frame ends at the end of January, then the end date should be
+
+
+But often enough it's unclear how to model the end of a time span. If the time frame ends at the end of January, then the end date should be
 
 ```
-end = 2021-02-01
+end = "2021-02-01"
 ```
 
 That the end date, the first moment in February, is not inside the time frame ("January") is refered to as "_exclusive_ end date".
 
-The opposite is an inclusive end date (e.g `end=2021-01-31`). But this comes with a lot of problems.
+The opposite is an inclusive end date (e.g `end = "2021-01-31"`). But this comes with a lot of problems.
 
-## Convenience and Conventions
+## Convention: `Duration = End - Start`
 
-It's just convenient to use exclusive end dates:
+It's just convenient to use exclusive end dates, because
 
 ```
-length_of_time_frame = end-start
+length_of_time_frame = end - start
 ```
 
 | Convention               | Exclusive Result                      | Naive Inclusive Result                | Inclusive Workaround            |
 | ------------------------ | ------------------------------------- | ------------------------------------- | ------------------------------- |
 | `duration = end - start` | `2021-02-01 - 2021-01-31 = 31 days`✔️ | `2021-01-31 - 2021-01-01 = 30 days`❌ | `duration = end - start + ??`😒 |
 
-Adding or substracting single days, seconds or ticks, when all you want is just the duration of a time slice is not convenient. 
+Adding or substracting single days, seconds or ticks, when all you want is just the duration of a time slice is not convenient.
 
 Basically all programming languages follow this convention:
 
@@ -74,5 +76,15 @@ func main() {
 	start := time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC)
 	end := time.Date(2021, 2, 1, 0, 0, 0, 0, time.UTC)
 	fmt.Printf("The time between %v and %v is %v days", start, end, end.Sub(start).Hours()/24)
+	// The time between 2021-01-01 00:00:00 +0000 UTC and 2021-02-01 00:00:00 +0000 UTC is 31 days
 }
+```
+
+### TypeScript
+```ts
+const start = new Date("2021-01-01T00:00:00Z")
+const end = new Date("2021-02-01T00:00:00Z")
+var durationMilliSeconds = end.getTime() - start.getTime()
+console.log(`The time between ${start} and ${end} is ${durationMilliSeconds/1000/60/60/24} days`)
+// "The time between Fri Jan 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) and Mon Feb 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) is 31 days" 
 ```
