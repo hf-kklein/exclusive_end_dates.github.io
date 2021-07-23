@@ -93,3 +93,10 @@ console.log(
 );
 // "The time between Fri Jan 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) and Mon Feb 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) is 31 days"
 ```
+
+### SQL
+
+```sql
+SELECT date('2021-02-01')-date('2021-01-01');
+-- 31
+```
