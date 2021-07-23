@@ -21,7 +21,7 @@ That the end date, the first moment in February, is not inside the time frame ("
 
 The opposite is an inclusive end date (e.g `end=2021-01-31`). But this comes with a lot of problems.
 
-## Convenience
+## Convenience and Conventions
 
 It's just convenient to use exclusive end dates:
 
@@ -52,3 +52,32 @@ Console.Out.WriteLine($"The time between {start:O} and {end:O} is {duration.Tota
 // The time between 2021-01-01T00:00:00.0000000Z and 2021-02-01T00:00:00.0000000Z is 31 days
 ```
 ([dotnet fiddle](https://dotnetfiddle.net/QpgTQW))
+
+### Python
+```python
+from datetime import date
+
+start = date(2021, 1, 1)
+end = date(2021, 2, 1)
+duration = end - start
+print(f"The time between {start} and {end} is {duration.days} days")
+# The time between 2021-01-01 and 2021-02-01 is 31 days
+```
+(_Pandas` allows [to specify](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.date_range.html) if `date_range` start and end are open/exclusive or closed/inclusive._)
+
+
+### Go
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	start := time.Date(2021, 1, 1, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2021, 2, 1, 0, 0, 0, 0, time.UTC)
+	fmt.Printf("The time between %v and %v is %v days", start, end, end.Sub(start).Hours()/24)
+}
+```
