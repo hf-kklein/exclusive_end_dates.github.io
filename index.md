@@ -18,9 +18,9 @@ But often enough it's unclear how to model the end of a time span. If the time f
 end = "2021-02-01"
 ```
 
-That the end date, the first moment in February, is not inside the time frame ("January") is refered to as "_exclusive_ end date".
+That the end date, the first moment in February, is not inside the time frame ("January") is refered to as **"_exclusive_ end date"**.
 
-The opposite is an inclusive end date (e.g `end = "2021-01-31"`). But this comes with a lot of problems.
+The opposite (modelling the end of January as `end = "2021-01-31"`) is an inclusive end date. But this comes with a lot of problems.
 
 ## Convention: `Duration = End - Start`
 
@@ -34,9 +34,9 @@ length_of_time_frame = end - start
 | ------------------------ | ------------------------------------- | ------------------------------------- | ------------------------------- |
 | `duration = end - start` | `2021-02-01 - 2021-01-31 = 31 days`✔️ | `2021-01-31 - 2021-01-01 = 30 days`❌ | `duration = end - start + ??`😒 |
 
-Adding or substracting single days, seconds or ticks, when all you want is just the duration of a time slice is not convenient.
+When using inclusive end dates (which you shouldn't), you'll have to build workarounds, that for example add or subtract single days, seconds, microseconds or ticks, when all you want is just the duration of a time slice. This is just not convenient.
 
-Basically all programming languages follow this convention:
+Basically all programming languages follow this convention.
 
 ### Python
 
@@ -61,8 +61,6 @@ var duration = end-start;
 Console.Out.WriteLine($"The time between {start:O} and {end:O} is {duration.TotalDays} days");
 // The time between 2021-01-01T00:00:00.0000000Z and 2021-02-01T00:00:00.0000000Z is 31 days
 ```
-
-([dotnet fiddle](https://dotnetfiddle.net/QpgTQW))
 
 ### Go
 
