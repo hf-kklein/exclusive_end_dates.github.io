@@ -12,7 +12,6 @@ start = "2021-01-01"
 
 Inclusive start dates are common sense.
 
-
 But often enough it's unclear how to model the end of a time span. If the time frame ends at the end of January, then the end date should be
 
 ```
@@ -84,10 +83,15 @@ func main() {
 ```
 
 ### TypeScript
+
 ```ts
-const start = new Date("2021-01-01T00:00:00Z")
-const end = new Date("2021-02-01T00:00:00Z")
-var durationMilliSeconds = end.getTime() - start.getTime()
-console.log(`The time between ${start} and ${end} is ${durationMilliSeconds/1000/60/60/24} days`)
-// "The time between Fri Jan 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) and Mon Feb 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) is 31 days" 
+const start = new Date("2021-01-01T00:00:00Z");
+const end = new Date("2021-02-01T00:00:00Z");
+var durationMilliSeconds = end.getTime() - start.getTime();
+console.log(
+  `The time between ${start} and ${end} is ${
+    durationMilliSeconds / 1000 / 60 / 60 / 24
+  } days`
+);
+// "The time between Fri Jan 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) and Mon Feb 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) is 31 days"
 ```
