@@ -102,6 +102,7 @@ SELECT date('2021-02-01')-date('2021-01-01');
 ```
 
 ## Avoiding the Need for Manual Workarounds when Connecting Systems/Languages with Different Temporal Resolutions
+
 If one language has the concept dates without a time (like Java) and you're connecting it to a system that only understands datetimes/timestamps, then, with inclusive end dates there's the need to explicitly think about the conversion.
 
 While an inclusive date `start = 2021-01-01` naturally translates to a datetime `2021-01-01T00:00:00Z` the inclusive `end = 2021-01-31` will be interpreted as `2021-01-31T00:00:00Z` by default which is obviously wrong. An inclusive end date requires the developer to think about such edge cases, while the exclusive `end = 2021-02-01` = `2021-02-01T00:00:00Z` requires no workarounds or adaptions at all. You'll find tons of edge cases to think about when using inclusive end dates, including nasty ones like: "What happens on days with switches of Daylight Saving Time (DST)? Do I need to add 23/25 hours after the UTC conversion or 24 without or maybe another second in years with a leap seacond? So just avoid it.
