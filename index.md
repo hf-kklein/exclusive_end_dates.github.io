@@ -109,6 +109,6 @@ While an inclusive date `start = 2021-01-01` naturally translates to a datetime 
 
 Generally the different temporal resolution between systems/langauges gives rise to uncertainties. Even if you provided an inclusive end datetime with seconds, what if milli and microseconds are supported? With inclusive end dates there'll always be a little gap between two adjacent time slices whose width is determined by the resolution of the datetime type in the respective language or system. You don't even need multiple systems for these edge cases to become relevant, they can already occur in the integration of the application with the underlying database/ORM.
 
-== Further Reading ==
+## Further Reading
 
 - ["Exclusive end dates" on QED Code](http://qedcode.com/content/exclusive-end-dates.html)
