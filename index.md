@@ -32,7 +32,7 @@ length_of_time_frame = end - start
 
 | Convention               | Exclusive Result                      | Naive Inclusive Result                | Inclusive Workaround            |
 | ------------------------ | ------------------------------------- | ------------------------------------- | ------------------------------- |
-| `duration = end - start` | `2021-02-01 - 2021-01-31 = 31 days`✔️ | `2021-01-31 - 2021-01-01 = 30 days`❌ | `duration = end - start + ??`😒 |
+| `duration = end - start` | `2021-02-01 - 2021-01-01 = 31 days`✔️ | `2021-01-31 - 2021-01-01 = 30 days`❌ | `duration = end - start + ??`😒 |
 
 When using inclusive end dates (which you shouldn't), you'll have to build workarounds, that for example add or subtract single days, seconds, microseconds or ticks, when all you want is just the duration of a time slice. This is just not convenient.
 
