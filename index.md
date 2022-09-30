@@ -103,15 +103,15 @@ SELECT date('2021-02-01')-date('2021-01-01');
 
 ## Avoiding the Need for Manual Workarounds when Connecting Systems/Languages with Different Temporal Resolutions
 
-If one language has the concept dates without a time (like f.e. Java or Python) and you're connecting it to a system that only understands datetimes/timestamps (like f.e. C# or Typescript), then, with inclusive end dates there's the need to explicitly think about the conversion.
+If one language has the concept of dates without a time (like e.g. Java or Python) and you're connecting it to a system that only understands datetimes/timestamps (like e.g. C# (prior to `DateOnly`) or Typescript), then, with inclusive end dates there's the need to explicitly think about the conversion.
 
-While an inclusive date `start = 2021-01-01` naturally translates to a datetime `2021-01-01T00:00:00Z` the inclusive `end = 2021-01-31` will be interpreted as `2021-01-31T00:00:00Z` by default which is obviously wrong. An inclusive end date requires the developer to think about such edge cases, while the exclusive `end = 2021-02-01` = `2021-02-01T00:00:00Z` requires no workarounds or adaptions at all. You'll find tons of edge cases to think about when using inclusive end dates, including nasty ones like: "What happens on days with switches of Daylight Saving Time (DST)? Do I need to add 23/25 hours after the UTC conversion or 24 without or maybe another second in years with a leap second? So just avoid it.
+While an inclusive start date `start = 2021-01-01` naturally translates to a datetime `2021-01-01T00:00:00Z` the inclusive `end = 2021-01-31` will be interpreted as `2021-01-31T00:00:00Z` by default which is obviously wrong. An inclusive end date requires the developer to think about edge cases, while the exclusive `end = 2021-02-01` = `2021-02-01T00:00:00Z` requires no workarounds or adaptions at all. You'll find tons of edge cases to think about when using inclusive end dates, including nasty ones like: "What happens on days with switches of Daylight Saving Time (DST)? Do I need to add 23/25 hours after the UTC conversion or 24 without or maybe another second in years with a leap second? So just avoid it.
 
 Generally the different temporal resolution between systems/languages gives rise to uncertainties. Even if you provided an inclusive end datetime with seconds, what if milli and microseconds are supported? With inclusive end dates there'll always be a little gap between two adjacent time slices whose width is determined by the resolution of the datetime type in the respective language or system. You don't even need multiple systems for these edge cases to become relevant, they can already occur in the integration of the application with the underlying database/ORM.
 
 ## What about the Users and their Habits?
-In spoken language it's unusual to speak about an end date and using midnight of the next day.
-So for users it might be helpful to display end dates inclusively like `2021-01-30` or even `2021-01-30T23:59:59` but those kind of helpful "guides to the eye" should be restricted to only happen in the UI. The real data underneath should not work with inclusive end dates.
+In spoken language it's unusual to use midnight of the next day when speaking about end dates.
+So for users it might be helpful to display end dates inclusively like `2021-01-31` or even `2021-01-31T23:59:59` but those kind of helpful "guides to the eye" should be restricted to only happen in the UI. The real data underneath should not work with inclusive end dates.
 
 ## Further Reading
 
