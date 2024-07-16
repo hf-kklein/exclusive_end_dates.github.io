@@ -31,8 +31,8 @@ It's just convenient to use exclusive end dates, because
 length_of_time_frame = end - start
 ```
 
-| Convention               | Exclusive Result                      | Naive Inclusive Result               | Inclusive Workaround            |
-|--------------------------|---------------------------------------|--------------------------------------|---------------------------------|
+| Convention               | Exclusive Result                      | Naive Inclusive Result                | Inclusive Workaround            |
+| ------------------------ | ------------------------------------- | ------------------------------------- | ------------------------------- |
 | `duration = end - start` | `2021-02-01 - 2021-01-01 = 31 days`✔️ | `2021-01-31 - 2021-01-01 = 30 days`❌ | `duration = end - start + ??`😒 |
 
 When using inclusive end dates (which you shouldn't), you'll have to build workarounds, that for example, add or subtract single days, seconds, microseconds or ticks, when all you want is just the duration of a time slice.
@@ -115,6 +115,7 @@ With inclusive end dates, there'll always be a little gap between two adjacent t
 You don't even need multiple systems for these edge cases to become relevant, they can already occur in the integration of the application with the underlying database/ORM.
 
 ## How to model 1 day / 0 day time slices?
+
 When modeling time slices with the duration "1 unit" (be it 1day, 1second, 1 millisecond...) you'll have problems with inclusive ends.
 Think of a contract which starts on `2024-01-01`.
 Its duration is 1 day, so the inclusive end would be `2024-01-01`, too.
@@ -125,6 +126,7 @@ You can literally see, how annoying it is, when the time slice does not obey the
 Just don't do it. Use exclusive ends.
 
 ## What about the Users and their Habits?
+
 In spoken language, it's unusual to use midnight of the next day when speaking about end dates.
 So for users it might be helpful to display end dates inclusively like `2021-01-31` or even `2021-01-31T23:59:59` but those kinds of helpful "guides to the eye" should be restricted to only happen in the UI.
 The real data underneath should not work with inclusive end dates.
