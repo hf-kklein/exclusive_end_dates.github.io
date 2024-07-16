@@ -91,7 +91,7 @@ var durationMilliSeconds = end.getTime() - start.getTime();
 console.log(
   `The time between ${start} and ${end} is ${
     durationMilliSeconds / 1000 / 60 / 60 / 24
-  } days`
+  } days`,
 );
 // "The time between Fri Jan 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) and Mon Feb 01 2021 01:00:00 GMT+0100 (Mitteleuropäische Normalzeit) is 31 days"
 ```
