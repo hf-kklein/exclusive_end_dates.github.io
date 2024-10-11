@@ -125,6 +125,29 @@ Would a 0-day duration lead to `end` < `start` time slices, just so that you can
 You can literally see, how annoying it is, when the time slice does not obey the rule `end - start = duration`.
 Just don't do it. Use exclusive ends.
 
+## Can't I just add a flag to indicate if my end is inclusive?
+
+Someone might come up with something like this:
+```json
+{
+   "ends_at": "2024-12-31T23:59:59Z"
+   "is_inclusive_end": true
+}
+```
+
+But that's no sufficient, because if you're handing over such an object to an API, what if the time type resolution of the system that interprets the object is microseconds and not seconds?
+You'd need to also provide the resolution like this:
+```json
+{
+   "ends_at": "2024-12-31T23:59:59Z"
+   "is_inclusive_end": true,
+   "resolution": "P1S"
+}
+```
+where `P1S` is the [ISO 8601 representation](https://en.wikipedia.org/wiki/ISO_8601#Durations) of a 1 second interval.
+
+Now ask you self: would you like write boilerplate code for all this, just to use inclusive ends?
+
 ## What about the Users and their Habits?
 
 In spoken language, it's unusual to use midnight of the next day when speaking about end dates.
